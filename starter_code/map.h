@@ -62,7 +62,8 @@ void print_revealed_map(int player_y, int player_x);
  */
 char * load_map(char * filename, int * map_height, int *map_width);
 
-
+#define CHARACTER_NOT_FOUND 0
+#define FOUND_CHARACTER 1
 /**
  * Attempt to find a character, given by the parameter character, in the map.
  * The function can assume the map, character_y, and character_x are all valid.
@@ -78,8 +79,6 @@ char * load_map(char * filename, int * map_height, int *map_width);
  *
  * @return One of CHARACTER_NOT_FOUND or FOUND_CHARACTER
  */
-#define CHARACTER_NOT_FOUND 0
-#define FOUND_CHARACTER 1
 int locate_character(char character, int* character_y, int* character_x);
 
 /** Other function prototypes can go below here **/

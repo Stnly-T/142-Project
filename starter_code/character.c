@@ -4,6 +4,8 @@
 #include "defines.h"
 #include "character.h"
 
+#include "map.h"
+
 extern char * map;
 extern int height;
 extern int width;
@@ -24,7 +26,41 @@ int move_character(int * y, int * x, char direction, char character) {
     // remove character from the old position and replace with EMPTY
     // set character in the new position in map
     // update the x/y coordinate pointers
-    return MOVED_OKAY;
+    int yCoordsToCheck;
+    int xCoordsToCheck;
+    switch (direction) {
+        case LEFT:
+            yCoordsToCheck = *y;
+            xCoordsToCheck = *x - 1;
+            break;
+        case RIGHT:
+            yCoordsToCheck = *y;
+            xCoordsToCheck = *x + 1;
+            break;
+        case UP:
+            yCoordsToCheck = *y - 1;
+            xCoordsToCheck = *x;
+            break;
+        case DOWN:
+            yCoordsToCheck = *y + 1;
+            xCoordsToCheck = *x;
+            break;
+        default:
+            return MOVED_INVALID_DIRECTION;
+            break;
+    }
+    if (map[yCoordsToCheck * width + xCoordsToCheck] == WALL) {
+        return MOVED_WALL;
+    } else if (yCoordsToCheck < 0 || yCoordsToCheck > height-1 || xCoordsToCheck < 0 || xCoordsToCheck > width-1) {
+        return MOVED_WALL;
+    } else {
+        map[yCoordsToCheck * width + xCoordsToCheck] = character;
+        map[*y * width + *x] = EMPTY;
+        *y = yCoordsToCheck;
+        *x = xCoordsToCheck;
+        return MOVED_OKAY;
+    }
+
 }
 
 int charge_minotaur(int *y, int *x, int player_y, int player_x, char charge_direction) {

@@ -42,7 +42,9 @@ void print_map(void) {
     for (int y = 0; y < height; y++) {
         for (int x = 0; x < width; x++) {
             printc(map[y * width + x]);
-            // printf(" ");
+            if (x!=width-1) {
+                printf(" ");
+            }
         }
         printf("\n");
     }
@@ -56,7 +58,16 @@ void print_revealed_map(int player_y, int player_x) {
 int locate_character(char character, int* character_y, int* character_x) {
     // Attempt to find the character in the map and return a status code indicating
     // if they were present
-    return FOUND_CHARACTER;
+    for (int y = 0; y < height; y++) {
+        for (int x = 0; x < width; x++) {
+            if (map[y * width + x] == character) {
+                *character_y = y;
+                *character_x = x;
+                return FOUND_CHARACTER;
+            }
+        }
+    }
+    return CHARACTER_NOT_FOUND;
 }
 
 

@@ -34,6 +34,77 @@ TEST_CASE("A test for load_map") {
 
 // Tests for is_wall
 
+// Tests for locate_character
+TEST_CASE("correctly returns character not found") {
+    int charX;
+    int charY;
+
+    char testMap1[] = {
+        EMPTY
+    };
+    width = 1;
+    height = 1;
+    map = testMap1;
+    CHECK(locate_character(PLAYER,&charY,&charX) == CHARACTER_NOT_FOUND);
+
+    char testMap2[] = {
+        EMPTY,MINOTAUR,
+        WALL,EMPTY
+    };
+    width = 2;
+    height = 2;
+    map = testMap2;
+    CHECK(locate_character(PLAYER,&charY,&charX) == CHARACTER_NOT_FOUND);
+
+    char testMap3[] = {
+        EMPTY,WALL,WALL,
+        WALL,EMPTY,PLAYER,
+        EMPTY,EMPTY,WALL
+    };
+    width = 3;
+    height = 3;
+    map = testMap3;
+    CHECK(locate_character(MINOTAUR,&charY,&charX) == CHARACTER_NOT_FOUND);
+
+}
+TEST_CASE("correctly returns character found with coordinates") {
+    int charX;
+    int charY;
+
+    char testMap1[] = {
+        PLAYER
+    };
+    width = 1;
+    height = 1;
+    map = testMap1;
+    CHECK(locate_character(PLAYER,&charY,&charX) == FOUND_CHARACTER);
+    CHECK(charY==0);
+    CHECK(charX==0);
+
+    char testMap2[] = {
+        EMPTY,PLAYER,
+        WALL,EMPTY
+    };
+    width = 2;
+    height = 2;
+    map = testMap2;
+    CHECK(locate_character(PLAYER,&charY,&charX) == FOUND_CHARACTER);
+    CHECK(charY==0);
+    CHECK(charX==1);
+
+    char testMap3[] = {
+        EMPTY,PLAYER,WALL,
+        WALL,EMPTY,WALL,
+        EMPTY,EMPTY,MINOTAUR
+    };
+    width = 3;
+    height = 3;
+    map = testMap3;
+    CHECK(locate_character(MINOTAUR,&charY,&charX) == FOUND_CHARACTER);
+    CHECK(charY==2);
+    CHECK(charX==2);
+}
+
 TEST_SUITE_END();
 
 /* tests for character.c */
@@ -42,7 +113,170 @@ TEST_SUITE_BEGIN("Character tests");
 // tests for sees_player
 
 // tests for move_character
+TEST_CASE("returns invalid movement on invalid input") {
+    width=11;
+    height=12;
+    int charY = 5;
+    int charX = 5;
 
+    CHECK(move_character(&charY,&charX,'p',PLAYER) == MOVED_INVALID_DIRECTION);
+}
+TEST_CASE("returns valid movement on up") {
+    char testMap[] = {
+        EMPTY, EMPTY, EMPTY,
+        EMPTY, PLAYER, EMPTY,
+        EMPTY, EMPTY, EMPTY
+        };
+    map = testMap;
+    width=3;
+    height=3;
+    int charY = 1;
+    int charX = 1;
+
+    CHECK(move_character(&charY,&charX,UP,PLAYER) == MOVED_OKAY);
+    CHECK(charY == 0);
+    CHECK(charX == 1);
+    CHECK(map[charY*width+charX] == PLAYER);
+    CHECK(map[1*width+1] == EMPTY);
+}
+TEST_CASE("returns valid movement on down") {
+    char testMap[] = {
+        EMPTY, EMPTY, EMPTY,
+        EMPTY, PLAYER, EMPTY,
+        EMPTY, EMPTY, EMPTY
+        };
+    map = testMap;
+    width=3;
+    height=3;
+    int charY = 1;
+    int charX = 1;
+
+    CHECK(move_character(&charY,&charX,DOWN,PLAYER) == MOVED_OKAY);
+    CHECK(charY == 2);
+    CHECK(charX == 1);
+    CHECK(map[charY*width+charX] == PLAYER);
+    CHECK(map[1*width+1] == EMPTY);
+}
+TEST_CASE("returns valid movement on left") {
+    char testMap[] = {
+        EMPTY, EMPTY, EMPTY,
+        EMPTY, PLAYER, EMPTY,
+        EMPTY, EMPTY, EMPTY
+        };
+    map = testMap;
+    width=3;
+    height=3;
+    int charY = 1;
+    int charX = 1;
+
+    CHECK(move_character(&charY,&charX,LEFT,PLAYER) == MOVED_OKAY);
+    CHECK(charY == 1);
+    CHECK(charX == 0);
+    CHECK(map[charY*width+charX] == PLAYER);
+    CHECK(map[1*width+1] == EMPTY);
+}
+TEST_CASE("returns valid movement on right") {
+    char testMap[] = {
+        EMPTY, EMPTY, EMPTY,
+        EMPTY, PLAYER, EMPTY,
+        EMPTY, EMPTY, EMPTY
+        };
+    map = testMap;
+    width=3;
+    height=3;
+    int charY = 1;
+    int charX = 1;
+
+    CHECK(move_character(&charY,&charX,RIGHT,PLAYER) == MOVED_OKAY);
+    CHECK(charY == 1);
+    CHECK(charX == 2);
+    CHECK(map[charY*width+charX] == PLAYER);
+    CHECK(map[1*width+1] == EMPTY);
+}
+TEST_CASE("movement functions for minotaur") {
+    char testMap[] = {
+        EMPTY, EMPTY, EMPTY,
+        EMPTY, MINOTAUR, EMPTY,
+        EMPTY, EMPTY, EMPTY
+        };
+    map = testMap;
+    width=3;
+    height=3;
+    int charY = 1;
+    int charX = 1;
+
+    CHECK(move_character(&charY,&charX,UP,MINOTAUR) == MOVED_OKAY);
+    CHECK(charY == 0);
+    CHECK(charX == 1);
+    CHECK(map[charY*width+charX] == MINOTAUR);
+    CHECK(map[1*width+1] == EMPTY);
+}
+TEST_CASE("prevents movement into wall") {
+    char testMap[] = {
+    WALL, WALL, WALL,
+    WALL, PLAYER, WALL,
+    WALL, WALL, WALL
+    };
+    map = testMap;
+    width=3;
+    height=3;
+    int charY = 1;
+    int charX = 1;
+
+    CHECK(move_character(&charY,&charX,UP,PLAYER) == MOVED_WALL);
+    CHECK(charY == 1);
+    CHECK(charX == 1);
+    CHECK(map[1*width+1] == PLAYER);
+    CHECK(map[0*width+1] == WALL);
+
+    CHECK(move_character(&charY,&charX,DOWN,PLAYER) == MOVED_WALL);
+    CHECK(charY == 1);
+    CHECK(charX == 1);
+    CHECK(map[1*width+1] == PLAYER);
+    CHECK(map[2*width+1] == WALL);
+
+    CHECK(move_character(&charY,&charX,LEFT,PLAYER) == MOVED_WALL);
+    CHECK(charY == 1);
+    CHECK(charX == 1);
+    CHECK(map[1*width+1] == PLAYER);
+    CHECK(map[1*width+0] == WALL);
+
+    CHECK(move_character(&charY,&charX,RIGHT,PLAYER) == MOVED_WALL);
+    CHECK(charY == 1);
+    CHECK(charX == 1);
+    CHECK(map[1*width+1] == PLAYER);
+    CHECK(map[1*width+2] == WALL);
+}
+TEST_CASE("prevents movement out of map") {
+    char testMap[] = {
+        PLAYER
+        };
+    map = testMap;
+    width=1;
+    height=1;
+    int charY = 0;
+    int charX = 0;
+
+    CHECK(move_character(&charY,&charX,UP,PLAYER) == MOVED_WALL);
+    CHECK(charY == 0);
+    CHECK(charX == 0);
+    CHECK(map[0*width+0] == PLAYER);
+
+    CHECK(move_character(&charY,&charX,DOWN,PLAYER) == MOVED_WALL);
+    CHECK(charY == 0);
+    CHECK(charX == 0);
+    CHECK(map[0*width+0] == PLAYER);
+
+    CHECK(move_character(&charY,&charX,LEFT,PLAYER) == MOVED_WALL);
+    CHECK(charY == 0);
+    CHECK(charX == 0);
+    CHECK(map[0*width+0] == PLAYER);
+
+    CHECK(move_character(&charY,&charX,RIGHT,PLAYER) == MOVED_WALL);
+    CHECK(charY == 0);
+    CHECK(charX == 0);
+    CHECK(map[0*width+0] == PLAYER);
+}
 // tests for charge_minotaur
 
 TEST_SUITE_END();
@@ -52,23 +286,36 @@ TEST_SUITE_BEGIN("Game tests");
 
 // tests for check_win
 TEST_CASE("player wins at bottom edge") {
+    width=11;
+    height=12;
     CHECK(check_win(height,1) == YOU_WIN);
+    CHECK(check_win(height+10,1) == YOU_WIN);
 }
 TEST_CASE("player wins at right edge") {
+    width=11;
+    height=12;
     CHECK(check_win(1,width) == YOU_WIN);
+    CHECK(check_win(1,width+10) == YOU_WIN);
 }
 TEST_CASE("player wins at top edge") {
+    width=11;
+    height=12;
     CHECK(check_win(0,1) == YOU_WIN);
+    CHECK(check_win(-10,1) == YOU_WIN);
 }
 TEST_CASE("player wins at left edge") {
+    width=11;
+    height=12;
     CHECK(check_win(1,0) == YOU_WIN);
+    CHECK(check_win(0,-10) == YOU_WIN);
 }
 TEST_CASE("player does not win while inside") {
-    int width=11, height=12;
+    width=11;
+    height=12;
     CHECK(check_win(1,1) == KEEP_GOING);
-    CHECK(check_win(height-1,1) == KEEP_GOING);
-    CHECK(check_win(1,width-1) == KEEP_GOING);
-    CHECK(check_win(height-1,width-1) == KEEP_GOING);
+    CHECK(check_win(height-2,1) == KEEP_GOING);
+    CHECK(check_win(1,width-2) == KEEP_GOING);
+    CHECK(check_win(height-2,width-2) == KEEP_GOING);
 }
 
 // test for check_loss
