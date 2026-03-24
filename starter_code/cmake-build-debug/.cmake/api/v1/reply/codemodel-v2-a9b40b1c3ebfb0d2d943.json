@@ -58,8 +58,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "C:/Users/tieus/CLionProjects/starter_code/starter_code/cmake-build-debug",
-		"source" : "C:/Users/tieus/CLionProjects/starter_code/starter_code"
+		"build" : "C:/Users/tieus/CLionProjects/git/142-Project/starter_code/cmake-build-debug",
+		"source" : "C:/Users/tieus/CLionProjects/git/142-Project/starter_code"
 	},
 	"version" : 
 	{

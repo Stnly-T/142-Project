@@ -111,6 +111,97 @@ TEST_SUITE_END();
 TEST_SUITE_BEGIN("Character tests");
 
 // tests for sees_player
+TEST_CASE("sees up") {
+    char testMap[] = {
+        EMPTY,PLAYER,EMPTY,
+        EMPTY,EMPTY,EMPTY,
+        EMPTY,EMPTY,EMPTY,
+        EMPTY,EMPTY,EMPTY,
+        EMPTY,EMPTY,EMPTY,
+        EMPTY,MINOTAUR,EMPTY
+    };
+    map = testMap;
+    width=3;
+    height=6;
+    int charY = 0;
+    int charX = 1;
+    int minoY = 5;
+    int minoX = 1;
+
+    CHECK(sees_player(charY, charX, minoY, minoX) == UP);
+}
+TEST_CASE("sees down") {
+    char testMap[] = {
+        EMPTY,MINOTAUR,EMPTY,
+        EMPTY,EMPTY,EMPTY,
+        EMPTY,EMPTY,EMPTY,
+        EMPTY,EMPTY,EMPTY,
+        EMPTY,EMPTY,EMPTY,
+        EMPTY,PLAYER,EMPTY
+    };
+    map = testMap;
+    width=3;
+    height=6;
+    int charY = 5;
+    int charX = 1;
+    int minoY = 0;
+    int minoX = 1;
+
+    CHECK(sees_player(charY, charX, minoY, minoX) == DOWN);
+}
+TEST_CASE("sees left") {
+    char testMap[] = {
+        EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,
+        PLAYER,EMPTY,EMPTY,EMPTY,MINOTAUR,
+        EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,
+    };
+    map = testMap;
+    width=5;
+    height=3;
+    int charY = 1;
+    int charX = 0;
+    int minoY = 1;
+    int minoX = 4;
+
+    CHECK(sees_player(charY, charX, minoY, minoX) == LEFT);
+}
+TEST_CASE("sees right") {
+    char testMap[] = {
+        EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,
+        MINOTAUR,EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,PLAYER,
+        EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,
+    };
+    map = testMap;
+    width=7;
+    height=3;
+    int charY = 1;
+    int charX = 6;
+    int minoY = 1;
+    int minoX = 0;
+
+    CHECK(sees_player(charY, charX, minoY, minoX) == RIGHT);
+}
+TEST_CASE("does not see through walls") {
+    char testMap[] = {
+        EMPTY,EMPTY,PLAYER,EMPTY,EMPTY,
+        EMPTY,EMPTY,WALL,EMPTY,EMPTY,
+        PLAYER,WALL,MINOTAUR,WALL,PLAYER,
+        EMPTY,EMPTY,WALL,EMPTY,EMPTY,
+        EMPTY,EMPTY,PLAYER,EMPTY,EMPTY
+    };
+    map = testMap;
+    width=5;
+    height=5;
+    int charY = 0;
+    int charX = 2;
+    int minoY = 2;
+    int minoX = 2;
+
+    CHECK(sees_player(charY, charX, minoY, minoX) == SEES_NOTHING);
+    CHECK(sees_player(2, 0, minoY, minoX) == SEES_NOTHING);
+    CHECK(sees_player(2, 4, minoY, minoX) == SEES_NOTHING);
+    CHECK(sees_player(4, 2, minoY, minoX) == SEES_NOTHING);
+}
 
 // tests for move_character
 TEST_CASE("returns invalid movement on invalid input") {
@@ -278,6 +369,24 @@ TEST_CASE("prevents movement out of map") {
     CHECK(map[0*width+0] == PLAYER);
 }
 // tests for charge_minotaur
+TEST_CASE("minotaur catches player") {
+    char testMap[] = {
+        PLAYER, EMPTY, MINOTAUR
+        };
+    map = testMap;
+    width=3;
+    height=1;
+    int charY = 0;
+    int charX = 0;
+    int minoY = 0;
+    int minoX = 2;
+
+    CHECK(charge_minotaur(&minoY, &minoX, charY, charX, LEFT) == CAUGHT_PLAYER);
+    CHECK(minoY == 0);
+    CHECK(minoX == 0);
+    CHECK(map[0*width+0] == MINOTAUR);
+    CHECK(map[0*width+2] == EMPTY);
+}
 
 TEST_SUITE_END();
 

@@ -4,6 +4,9 @@
 #include "defines.h"
 #include "character.h"
 
+#include <stdio.h>
+
+#include "game.h"
 #include "map.h"
 
 extern char * map;
@@ -15,6 +18,45 @@ char sees_player(int player_y, int player_x, int minotaur_y, int minotaur_x) {
     // check if neither the x nor y coordinate is the same as the player
     // if there's a wall in between, they can't see
     // if one of them is the same, check if the path in between is clear
+    if (player_x == minotaur_x && player_y == minotaur_y) {
+        return CAUGHT_PLAYER;
+    }
+
+    if (player_x == minotaur_x) {
+        if (player_y > minotaur_y) {
+            for (int y = minotaur_y; y <= player_y; y++) {
+                if (map[y * width + minotaur_x] == WALL) {
+                    return SEES_NOTHING;
+                }
+            }
+            return DOWN;
+        } else {
+            for (int y = minotaur_y; y >= player_y; y--) {
+                if (map[y * width + minotaur_x] == WALL) {
+                    return SEES_NOTHING;
+                }
+            }
+            return UP;
+        }
+    }
+
+    if (player_y == minotaur_y) {
+        if (player_x > minotaur_x) {
+            for (int x = minotaur_x; x <= player_y; x++) {
+                if (map[minotaur_y * width + x] == WALL) {
+                    return SEES_NOTHING;
+                }
+            }
+            return RIGHT;
+        } else {
+            for (int x = minotaur_x; x >= player_y; x--) {
+                if (map[minotaur_y * width + x] == WALL) {
+                    return SEES_NOTHING;
+                }
+            }
+            return LEFT;
+        }
+    }
     return SEES_NOTHING;
 }
 
@@ -67,5 +109,52 @@ int charge_minotaur(int *y, int *x, int player_y, int player_x, char charge_dire
     // call move_character twice or until a wall is hit
     // when the wall is hit, move the Minotaur into the wall in the direction it is charging
     // calculate the new coordinates
+    if (charge_direction != UP && charge_direction != DOWN && charge_direction != LEFT && charge_direction != RIGHT) {
+        return MOVED_INVALID_DIRECTION;
+    }
+
+    int moveStatus;
+    for (int loopFlag = 0; loopFlag < 2; loopFlag++) {
+        moveStatus = move_character(y, x, charge_direction, MINOTAUR);
+        printf("%d %d %d %d %d %d %d \n", moveStatus, *y, *x, player_y, player_x, charge_direction, loopFlag);
+        switch (moveStatus) {
+            case MOVED_OKAY:
+                if (check_loss(player_y, player_x,*y,*x) == YOU_LOSE) {
+                    printf("a\n");
+                    return CAUGHT_PLAYER;
+                }
+                if (loopFlag == 1) {
+                    printf("b\n");
+                    return MOVED_OKAY;
+                }
+                break;
+            case MOVED_WALL:
+                printf("wall");
+                int yCoordsToCheck;
+                int xCoordsToCheck;
+                switch (charge_direction) {
+                    case LEFT:
+                        yCoordsToCheck = *y;
+                        xCoordsToCheck = *x - 1;
+                        break;
+                    case RIGHT:
+                        yCoordsToCheck = *y;
+                        xCoordsToCheck = *x + 1;
+                        break;
+                    case UP:
+                        yCoordsToCheck = *y - 1;
+                        xCoordsToCheck = *x;
+                        break;
+                    case DOWN:
+                        yCoordsToCheck = *y + 1;
+                        xCoordsToCheck = *x;
+                        break;
+                }
+                map[yCoordsToCheck * width + xCoordsToCheck] = EMPTY;
+                move_character(y, x, charge_direction, MINOTAUR);
+                return MOVED_WALL;
+        }
+    }
+
     return MOVED_OKAY;
 }

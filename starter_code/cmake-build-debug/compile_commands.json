@@ -1,62 +1,62 @@
 [
 {
-  "directory": "C:/Users/tieus/CLionProjects/starter_code/starter_code/cmake-build-debug",
-  "command": "C:\\PROGRA~1\\JETBRA~1\\CLION2~1.2\\bin\\mingw\\bin\\gcc.exe -Werror=vla -Wall -pedantic -Wno-format -Wno-unused-parameter -fexceptions -fstack-protector-strong -std=c99 -Wextra -Werror=implicit-function-declaration -g -std=gnu11 -fdiagnostics-color=always -o CMakeFiles\\project.dir\\apsc142project.c.obj -c C:\\Users\\tieus\\CLionProjects\\starter_code\\starter_code\\apsc142project.c",
-  "file": "C:/Users/tieus/CLionProjects/starter_code/starter_code/apsc142project.c",
-  "output": "C:/Users/tieus/CLionProjects/starter_code/starter_code/cmake-build-debug/CMakeFiles/project.dir/apsc142project.c.obj"
+  "directory": "C:/Users/tieus/CLionProjects/git/142-Project/starter_code/cmake-build-debug",
+  "command": "C:\\PROGRA~1\\JETBRA~1\\CLION2~1.2\\bin\\mingw\\bin\\gcc.exe -Werror=vla -Wall -pedantic -Wno-format -Wno-unused-parameter -fexceptions -fstack-protector-strong -std=c99 -Wextra -Werror=implicit-function-declaration -g -std=gnu11 -fdiagnostics-color=always -o CMakeFiles\\project.dir\\apsc142project.c.obj -c C:\\Users\\tieus\\CLionProjects\\git\\142-Project\\starter_code\\apsc142project.c",
+  "file": "C:/Users/tieus/CLionProjects/git/142-Project/starter_code/apsc142project.c",
+  "output": "C:/Users/tieus/CLionProjects/git/142-Project/starter_code/cmake-build-debug/CMakeFiles/project.dir/apsc142project.c.obj"
 },
 {
-  "directory": "C:/Users/tieus/CLionProjects/starter_code/starter_code/cmake-build-debug",
-  "command": "C:\\PROGRA~1\\JETBRA~1\\CLION2~1.2\\bin\\mingw\\bin\\gcc.exe -Werror=vla -Wall -pedantic -Wno-format -Wno-unused-parameter -fexceptions -fstack-protector-strong -std=c99 -Wextra -Werror=implicit-function-declaration -g -std=gnu11 -fdiagnostics-color=always -o CMakeFiles\\project.dir\\colours.c.obj -c C:\\Users\\tieus\\CLionProjects\\starter_code\\starter_code\\colours.c",
-  "file": "C:/Users/tieus/CLionProjects/starter_code/starter_code/colours.c",
-  "output": "C:/Users/tieus/CLionProjects/starter_code/starter_code/cmake-build-debug/CMakeFiles/project.dir/colours.c.obj"
+  "directory": "C:/Users/tieus/CLionProjects/git/142-Project/starter_code/cmake-build-debug",
+  "command": "C:\\PROGRA~1\\JETBRA~1\\CLION2~1.2\\bin\\mingw\\bin\\gcc.exe -Werror=vla -Wall -pedantic -Wno-format -Wno-unused-parameter -fexceptions -fstack-protector-strong -std=c99 -Wextra -Werror=implicit-function-declaration -g -std=gnu11 -fdiagnostics-color=always -o CMakeFiles\\project.dir\\colours.c.obj -c C:\\Users\\tieus\\CLionProjects\\git\\142-Project\\starter_code\\colours.c",
+  "file": "C:/Users/tieus/CLionProjects/git/142-Project/starter_code/colours.c",
+  "output": "C:/Users/tieus/CLionProjects/git/142-Project/starter_code/cmake-build-debug/CMakeFiles/project.dir/colours.c.obj"
 },
 {
-  "directory": "C:/Users/tieus/CLionProjects/starter_code/starter_code/cmake-build-debug",
-  "command": "C:\\PROGRA~1\\JETBRA~1\\CLION2~1.2\\bin\\mingw\\bin\\gcc.exe -Werror=vla -Wall -pedantic -Wno-format -Wno-unused-parameter -fexceptions -fstack-protector-strong -std=c99 -Wextra -Werror=implicit-function-declaration -g -std=gnu11 -fdiagnostics-color=always -o CMakeFiles\\project.dir\\map.c.obj -c C:\\Users\\tieus\\CLionProjects\\starter_code\\starter_code\\map.c",
-  "file": "C:/Users/tieus/CLionProjects/starter_code/starter_code/map.c",
-  "output": "C:/Users/tieus/CLionProjects/starter_code/starter_code/cmake-build-debug/CMakeFiles/project.dir/map.c.obj"
+  "directory": "C:/Users/tieus/CLionProjects/git/142-Project/starter_code/cmake-build-debug",
+  "command": "C:\\PROGRA~1\\JETBRA~1\\CLION2~1.2\\bin\\mingw\\bin\\gcc.exe -Werror=vla -Wall -pedantic -Wno-format -Wno-unused-parameter -fexceptions -fstack-protector-strong -std=c99 -Wextra -Werror=implicit-function-declaration -g -std=gnu11 -fdiagnostics-color=always -o CMakeFiles\\project.dir\\map.c.obj -c C:\\Users\\tieus\\CLionProjects\\git\\142-Project\\starter_code\\map.c",
+  "file": "C:/Users/tieus/CLionProjects/git/142-Project/starter_code/map.c",
+  "output": "C:/Users/tieus/CLionProjects/git/142-Project/starter_code/cmake-build-debug/CMakeFiles/project.dir/map.c.obj"
 },
 {
-  "directory": "C:/Users/tieus/CLionProjects/starter_code/starter_code/cmake-build-debug",
-  "command": "C:\\PROGRA~1\\JETBRA~1\\CLION2~1.2\\bin\\mingw\\bin\\gcc.exe -Werror=vla -Wall -pedantic -Wno-format -Wno-unused-parameter -fexceptions -fstack-protector-strong -std=c99 -Wextra -Werror=implicit-function-declaration -g -std=gnu11 -fdiagnostics-color=always -o CMakeFiles\\project.dir\\game.c.obj -c C:\\Users\\tieus\\CLionProjects\\starter_code\\starter_code\\game.c",
-  "file": "C:/Users/tieus/CLionProjects/starter_code/starter_code/game.c",
-  "output": "C:/Users/tieus/CLionProjects/starter_code/starter_code/cmake-build-debug/CMakeFiles/project.dir/game.c.obj"
+  "directory": "C:/Users/tieus/CLionProjects/git/142-Project/starter_code/cmake-build-debug",
+  "command": "C:\\PROGRA~1\\JETBRA~1\\CLION2~1.2\\bin\\mingw\\bin\\gcc.exe -Werror=vla -Wall -pedantic -Wno-format -Wno-unused-parameter -fexceptions -fstack-protector-strong -std=c99 -Wextra -Werror=implicit-function-declaration -g -std=gnu11 -fdiagnostics-color=always -o CMakeFiles\\project.dir\\game.c.obj -c C:\\Users\\tieus\\CLionProjects\\git\\142-Project\\starter_code\\game.c",
+  "file": "C:/Users/tieus/CLionProjects/git/142-Project/starter_code/game.c",
+  "output": "C:/Users/tieus/CLionProjects/git/142-Project/starter_code/cmake-build-debug/CMakeFiles/project.dir/game.c.obj"
 },
 {
-  "directory": "C:/Users/tieus/CLionProjects/starter_code/starter_code/cmake-build-debug",
-  "command": "C:\\PROGRA~1\\JETBRA~1\\CLION2~1.2\\bin\\mingw\\bin\\gcc.exe -Werror=vla -Wall -pedantic -Wno-format -Wno-unused-parameter -fexceptions -fstack-protector-strong -std=c99 -Wextra -Werror=implicit-function-declaration -g -std=gnu11 -fdiagnostics-color=always -o CMakeFiles\\project.dir\\character.c.obj -c C:\\Users\\tieus\\CLionProjects\\starter_code\\starter_code\\character.c",
-  "file": "C:/Users/tieus/CLionProjects/starter_code/starter_code/character.c",
-  "output": "C:/Users/tieus/CLionProjects/starter_code/starter_code/cmake-build-debug/CMakeFiles/project.dir/character.c.obj"
+  "directory": "C:/Users/tieus/CLionProjects/git/142-Project/starter_code/cmake-build-debug",
+  "command": "C:\\PROGRA~1\\JETBRA~1\\CLION2~1.2\\bin\\mingw\\bin\\gcc.exe -Werror=vla -Wall -pedantic -Wno-format -Wno-unused-parameter -fexceptions -fstack-protector-strong -std=c99 -Wextra -Werror=implicit-function-declaration -g -std=gnu11 -fdiagnostics-color=always -o CMakeFiles\\project.dir\\character.c.obj -c C:\\Users\\tieus\\CLionProjects\\git\\142-Project\\starter_code\\character.c",
+  "file": "C:/Users/tieus/CLionProjects/git/142-Project/starter_code/character.c",
+  "output": "C:/Users/tieus/CLionProjects/git/142-Project/starter_code/cmake-build-debug/CMakeFiles/project.dir/character.c.obj"
 },
 {
-  "directory": "C:/Users/tieus/CLionProjects/starter_code/starter_code/cmake-build-debug",
-  "command": "C:\\PROGRA~1\\JETBRA~1\\CLION2~1.2\\bin\\mingw\\bin\\G__~1.EXE -Wall -pedantic -Wno-format -Wno-unused-parameter -fexceptions -fstack-protector-strong -g -std=gnu++20 -fdiagnostics-color=always -o CMakeFiles\\tests.dir\\tests.cpp.obj -c C:\\Users\\tieus\\CLionProjects\\starter_code\\starter_code\\tests.cpp",
-  "file": "C:/Users/tieus/CLionProjects/starter_code/starter_code/tests.cpp",
-  "output": "C:/Users/tieus/CLionProjects/starter_code/starter_code/cmake-build-debug/CMakeFiles/tests.dir/tests.cpp.obj"
+  "directory": "C:/Users/tieus/CLionProjects/git/142-Project/starter_code/cmake-build-debug",
+  "command": "C:\\PROGRA~1\\JETBRA~1\\CLION2~1.2\\bin\\mingw\\bin\\G__~1.EXE -Wall -pedantic -Wno-format -Wno-unused-parameter -fexceptions -fstack-protector-strong -g -std=gnu++20 -fdiagnostics-color=always -o CMakeFiles\\tests.dir\\tests.cpp.obj -c C:\\Users\\tieus\\CLionProjects\\git\\142-Project\\starter_code\\tests.cpp",
+  "file": "C:/Users/tieus/CLionProjects/git/142-Project/starter_code/tests.cpp",
+  "output": "C:/Users/tieus/CLionProjects/git/142-Project/starter_code/cmake-build-debug/CMakeFiles/tests.dir/tests.cpp.obj"
 },
 {
-  "directory": "C:/Users/tieus/CLionProjects/starter_code/starter_code/cmake-build-debug",
-  "command": "C:\\PROGRA~1\\JETBRA~1\\CLION2~1.2\\bin\\mingw\\bin\\gcc.exe -Werror=vla -Wall -pedantic -Wno-format -Wno-unused-parameter -fexceptions -fstack-protector-strong -std=c99 -Wextra -Werror=implicit-function-declaration -g -std=gnu11 -fdiagnostics-color=always -o CMakeFiles\\tests.dir\\colours.c.obj -c C:\\Users\\tieus\\CLionProjects\\starter_code\\starter_code\\colours.c",
-  "file": "C:/Users/tieus/CLionProjects/starter_code/starter_code/colours.c",
-  "output": "C:/Users/tieus/CLionProjects/starter_code/starter_code/cmake-build-debug/CMakeFiles/tests.dir/colours.c.obj"
+  "directory": "C:/Users/tieus/CLionProjects/git/142-Project/starter_code/cmake-build-debug",
+  "command": "C:\\PROGRA~1\\JETBRA~1\\CLION2~1.2\\bin\\mingw\\bin\\gcc.exe -Werror=vla -Wall -pedantic -Wno-format -Wno-unused-parameter -fexceptions -fstack-protector-strong -std=c99 -Wextra -Werror=implicit-function-declaration -g -std=gnu11 -fdiagnostics-color=always -o CMakeFiles\\tests.dir\\colours.c.obj -c C:\\Users\\tieus\\CLionProjects\\git\\142-Project\\starter_code\\colours.c",
+  "file": "C:/Users/tieus/CLionProjects/git/142-Project/starter_code/colours.c",
+  "output": "C:/Users/tieus/CLionProjects/git/142-Project/starter_code/cmake-build-debug/CMakeFiles/tests.dir/colours.c.obj"
 },
 {
-  "directory": "C:/Users/tieus/CLionProjects/starter_code/starter_code/cmake-build-debug",
-  "command": "C:\\PROGRA~1\\JETBRA~1\\CLION2~1.2\\bin\\mingw\\bin\\gcc.exe -Werror=vla -Wall -pedantic -Wno-format -Wno-unused-parameter -fexceptions -fstack-protector-strong -std=c99 -Wextra -Werror=implicit-function-declaration -g -std=gnu11 -fdiagnostics-color=always -o CMakeFiles\\tests.dir\\map.c.obj -c C:\\Users\\tieus\\CLionProjects\\starter_code\\starter_code\\map.c",
-  "file": "C:/Users/tieus/CLionProjects/starter_code/starter_code/map.c",
-  "output": "C:/Users/tieus/CLionProjects/starter_code/starter_code/cmake-build-debug/CMakeFiles/tests.dir/map.c.obj"
+  "directory": "C:/Users/tieus/CLionProjects/git/142-Project/starter_code/cmake-build-debug",
+  "command": "C:\\PROGRA~1\\JETBRA~1\\CLION2~1.2\\bin\\mingw\\bin\\gcc.exe -Werror=vla -Wall -pedantic -Wno-format -Wno-unused-parameter -fexceptions -fstack-protector-strong -std=c99 -Wextra -Werror=implicit-function-declaration -g -std=gnu11 -fdiagnostics-color=always -o CMakeFiles\\tests.dir\\map.c.obj -c C:\\Users\\tieus\\CLionProjects\\git\\142-Project\\starter_code\\map.c",
+  "file": "C:/Users/tieus/CLionProjects/git/142-Project/starter_code/map.c",
+  "output": "C:/Users/tieus/CLionProjects/git/142-Project/starter_code/cmake-build-debug/CMakeFiles/tests.dir/map.c.obj"
 },
 {
-  "directory": "C:/Users/tieus/CLionProjects/starter_code/starter_code/cmake-build-debug",
-  "command": "C:\\PROGRA~1\\JETBRA~1\\CLION2~1.2\\bin\\mingw\\bin\\gcc.exe -Werror=vla -Wall -pedantic -Wno-format -Wno-unused-parameter -fexceptions -fstack-protector-strong -std=c99 -Wextra -Werror=implicit-function-declaration -g -std=gnu11 -fdiagnostics-color=always -o CMakeFiles\\tests.dir\\game.c.obj -c C:\\Users\\tieus\\CLionProjects\\starter_code\\starter_code\\game.c",
-  "file": "C:/Users/tieus/CLionProjects/starter_code/starter_code/game.c",
-  "output": "C:/Users/tieus/CLionProjects/starter_code/starter_code/cmake-build-debug/CMakeFiles/tests.dir/game.c.obj"
+  "directory": "C:/Users/tieus/CLionProjects/git/142-Project/starter_code/cmake-build-debug",
+  "command": "C:\\PROGRA~1\\JETBRA~1\\CLION2~1.2\\bin\\mingw\\bin\\gcc.exe -Werror=vla -Wall -pedantic -Wno-format -Wno-unused-parameter -fexceptions -fstack-protector-strong -std=c99 -Wextra -Werror=implicit-function-declaration -g -std=gnu11 -fdiagnostics-color=always -o CMakeFiles\\tests.dir\\game.c.obj -c C:\\Users\\tieus\\CLionProjects\\git\\142-Project\\starter_code\\game.c",
+  "file": "C:/Users/tieus/CLionProjects/git/142-Project/starter_code/game.c",
+  "output": "C:/Users/tieus/CLionProjects/git/142-Project/starter_code/cmake-build-debug/CMakeFiles/tests.dir/game.c.obj"
 },
 {
-  "directory": "C:/Users/tieus/CLionProjects/starter_code/starter_code/cmake-build-debug",
-  "command": "C:\\PROGRA~1\\JETBRA~1\\CLION2~1.2\\bin\\mingw\\bin\\gcc.exe -Werror=vla -Wall -pedantic -Wno-format -Wno-unused-parameter -fexceptions -fstack-protector-strong -std=c99 -Wextra -Werror=implicit-function-declaration -g -std=gnu11 -fdiagnostics-color=always -o CMakeFiles\\tests.dir\\character.c.obj -c C:\\Users\\tieus\\CLionProjects\\starter_code\\starter_code\\character.c",
-  "file": "C:/Users/tieus/CLionProjects/starter_code/starter_code/character.c",
-  "output": "C:/Users/tieus/CLionProjects/starter_code/starter_code/cmake-build-debug/CMakeFiles/tests.dir/character.c.obj"
+  "directory": "C:/Users/tieus/CLionProjects/git/142-Project/starter_code/cmake-build-debug",
+  "command": "C:\\PROGRA~1\\JETBRA~1\\CLION2~1.2\\bin\\mingw\\bin\\gcc.exe -Werror=vla -Wall -pedantic -Wno-format -Wno-unused-parameter -fexceptions -fstack-protector-strong -std=c99 -Wextra -Werror=implicit-function-declaration -g -std=gnu11 -fdiagnostics-color=always -o CMakeFiles\\tests.dir\\character.c.obj -c C:\\Users\\tieus\\CLionProjects\\git\\142-Project\\starter_code\\character.c",
+  "file": "C:/Users/tieus/CLionProjects/git/142-Project/starter_code/character.c",
+  "output": "C:/Users/tieus/CLionProjects/git/142-Project/starter_code/cmake-build-debug/CMakeFiles/tests.dir/character.c.obj"
 }
 ]
