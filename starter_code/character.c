@@ -25,35 +25,50 @@ char sees_player(int player_y, int player_x, int minotaur_y, int minotaur_x) {
     if (player_x == minotaur_x) {
         if (player_y > minotaur_y) {
             for (int y = minotaur_y; y <= player_y; y++) {
+                // printf("%d %c \n", y, map[y * width + minotaur_x]);
                 if (map[y * width + minotaur_x] == WALL) {
+                    // printf("\n");
                     return SEES_NOTHING;
                 }
             }
+            printf("a\n");
             return DOWN;
         } else {
             for (int y = minotaur_y; y >= player_y; y--) {
+                // printf("%d %c \n", y, map[y * width + minotaur_x]);
                 if (map[y * width + minotaur_x] == WALL) {
+                    // printf("\n");
                     return SEES_NOTHING;
                 }
             }
+            printf("b\n");
+
             return UP;
         }
     }
 
     if (player_y == minotaur_y) {
         if (player_x > minotaur_x) {
-            for (int x = minotaur_x; x <= player_y; x++) {
+            for (int x = minotaur_x; x <= player_x; x++) {
+                // printf("%d %c\n", x, map[minotaur_y * width + x]);
                 if (map[minotaur_y * width + x] == WALL) {
+                    // printf("\n");
                     return SEES_NOTHING;
                 }
             }
+            printf("c\n");
+
             return RIGHT;
         } else {
-            for (int x = minotaur_x; x >= player_y; x--) {
+            for (int x = minotaur_x; x >= player_x; x--) {
+                // printf("%d %c %d\n", x, map[minotaur_y * width + x], player_x);
                 if (map[minotaur_y * width + x] == WALL) {
+                    // printf("\n");
                     return SEES_NOTHING;
                 }
             }
+            printf("d\n");
+
             return LEFT;
         }
     }
@@ -116,7 +131,7 @@ int charge_minotaur(int *y, int *x, int player_y, int player_x, char charge_dire
     int moveStatus;
     for (int loopFlag = 0; loopFlag < 2; loopFlag++) {
         moveStatus = move_character(y, x, charge_direction, MINOTAUR);
-        printf("%d %d %d %d %d %d %d \n", moveStatus, *y, *x, player_y, player_x, charge_direction, loopFlag);
+        // printf("%d %d %d %d %d %d %d \n", moveStatus, *y, *x, player_y, player_x, charge_direction, loopFlag);
         switch (moveStatus) {
             case MOVED_OKAY:
                 if (check_loss(player_y, player_x,*y,*x) == YOU_LOSE) {
@@ -152,6 +167,7 @@ int charge_minotaur(int *y, int *x, int player_y, int player_x, char charge_dire
                 }
                 map[yCoordsToCheck * width + xCoordsToCheck] = EMPTY;
                 move_character(y, x, charge_direction, MINOTAUR);
+                // print_map();
                 return MOVED_WALL;
         }
     }

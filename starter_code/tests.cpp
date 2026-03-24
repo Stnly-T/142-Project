@@ -369,6 +369,42 @@ TEST_CASE("prevents movement out of map") {
     CHECK(map[0*width+0] == PLAYER);
 }
 // tests for charge_minotaur
+TEST_CASE("minotaur charge handles invalid direction") {
+    char testMap[] = {
+        MINOTAUR, EMPTY, EMPTY, PLAYER
+        };
+    map = testMap;
+    width=4;
+    height=1;
+    int charY = 0;
+    int charX = 3;
+    int minoY = 0;
+    int minoX = 0;
+
+    CHECK(charge_minotaur(&minoY, &minoX, charY, charX, 'l') == MOVED_INVALID_DIRECTION);
+    CHECK(minoY == 0);
+    CHECK(minoX == 0);
+    CHECK(map[0*width+0] == MINOTAUR);
+    CHECK(map[0*width+2] == EMPTY);
+}
+TEST_CASE("minotaur charges") {
+    char testMap[] = {
+        MINOTAUR, EMPTY, EMPTY, PLAYER
+        };
+    map = testMap;
+    width=4;
+    height=1;
+    int charY = 0;
+    int charX = 3;
+    int minoY = 0;
+    int minoX = 0;
+
+    CHECK(charge_minotaur(&minoY, &minoX, charY, charX, RIGHT) == MOVED_OKAY);
+    CHECK(minoY == 0);
+    CHECK(minoX == 2);
+    CHECK(map[0*width+2] == MINOTAUR);
+    CHECK(map[0*width+0] == EMPTY);
+}
 TEST_CASE("minotaur catches player") {
     char testMap[] = {
         PLAYER, EMPTY, MINOTAUR
@@ -386,6 +422,48 @@ TEST_CASE("minotaur catches player") {
     CHECK(minoX == 0);
     CHECK(map[0*width+0] == MINOTAUR);
     CHECK(map[0*width+2] == EMPTY);
+}
+TEST_CASE("minotaur breaks walls") {
+    char testMap[] = {
+        MINOTAUR, EMPTY, WALL, PLAYER
+        };
+    map = testMap;
+    width=4;
+    height=1;
+    int charY = 0;
+    int charX = 3;
+    int minoY = 0;
+    int minoX = 0;
+
+    CHECK(charge_minotaur(&minoY, &minoX, charY, charX, RIGHT) == MOVED_WALL);
+    // print_map();
+    CHECK(minoY == 0);
+    CHECK(minoX == 2);
+    CHECK(map[0*width+2] == MINOTAUR);
+    CHECK(map[0*width+0] == EMPTY);
+
+}
+TEST_CASE("minotaur wall destroys all directions") {
+    char testMap[] = {
+        WALL, WALL, WALL, WALL, WALL,
+        WALL, WALL, WALL, WALL, WALL,
+        WALL, WALL, MINOTAUR, WALL, WALL,
+        WALL, WALL, WALL, WALL, WALL,
+        WALL, WALL, WALL, WALL, PLAYER,
+        };
+    map = testMap;
+    width=4;
+    height=1;
+    int charY = 4;
+    int charX = 4;
+    int minoY = 2;
+    int minoX = 2;
+
+    CHECK(charge_minotaur(&minoY, &minoX, charY, charX, RIGHT) == MOVED_WALL);
+    CHECK(charge_minotaur(&minoY, &minoX, charY, charX, LEFT) == MOVED_WALL);
+    CHECK(charge_minotaur(&minoY, &minoX, charY, charX, UP) == MOVED_WALL);
+    CHECK(charge_minotaur(&minoY, &minoX, charY, charX, DOWN) == MOVED_WALL);
+
 }
 
 TEST_SUITE_END();
