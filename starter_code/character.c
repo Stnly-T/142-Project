@@ -22,9 +22,13 @@ char sees_player(int player_y, int player_x, int minotaur_y, int minotaur_x) {
         return CAUGHT_PLAYER;
     }
 
+    if (player_x != minotaur_x && player_y != minotaur_y) {
+        return SEES_NOTHING;
+    }
+
     if (player_x == minotaur_x) {
         if (player_y > minotaur_y) {
-            for (int y = minotaur_y; y <= player_y; y++) {
+            for (int y = minotaur_y; y < player_y; y++) {
                 // printf("%d %c \n", y, map[y * width + minotaur_x]);
                 if (map[y * width + minotaur_x] == WALL) {
                     // printf("\n");
@@ -34,7 +38,7 @@ char sees_player(int player_y, int player_x, int minotaur_y, int minotaur_x) {
             printf("a\n");
             return DOWN;
         } else {
-            for (int y = minotaur_y; y >= player_y; y--) {
+            for (int y = minotaur_y; y > player_y; y--) {
                 // printf("%d %c \n", y, map[y * width + minotaur_x]);
                 if (map[y * width + minotaur_x] == WALL) {
                     // printf("\n");
@@ -49,7 +53,7 @@ char sees_player(int player_y, int player_x, int minotaur_y, int minotaur_x) {
 
     if (player_y == minotaur_y) {
         if (player_x > minotaur_x) {
-            for (int x = minotaur_x; x <= player_x; x++) {
+            for (int x = minotaur_x; x < player_x; x++) {
                 // printf("%d %c\n", x, map[minotaur_y * width + x]);
                 if (map[minotaur_y * width + x] == WALL) {
                     // printf("\n");
@@ -60,7 +64,7 @@ char sees_player(int player_y, int player_x, int minotaur_y, int minotaur_x) {
 
             return RIGHT;
         } else {
-            for (int x = minotaur_x; x >= player_x; x--) {
+            for (int x = minotaur_x; x > player_x; x--) {
                 // printf("%d %c %d\n", x, map[minotaur_y * width + x], player_x);
                 if (map[minotaur_y * width + x] == WALL) {
                     // printf("\n");
@@ -72,7 +76,6 @@ char sees_player(int player_y, int player_x, int minotaur_y, int minotaur_x) {
             return LEFT;
         }
     }
-    return SEES_NOTHING;
 }
 
 int move_character(int * y, int * x, char direction, char character) {

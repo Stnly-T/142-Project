@@ -72,5 +72,42 @@ int locate_character(char character, int* character_y, int* character_x) {
 
 
 char *load_map(char *filename, int *map_height, int *map_width) {
-    return NULL;
+    FILE *fpMap = fopen(filename, "r");
+    char characterToCheck = getc(fpMap);
+    if (characterToCheck == EOF) {
+        return NULL;
+    }
+
+    int i = 0;
+    char *map = (char*)malloc(1*sizeof(char));
+
+    while (characterToCheck != EOF) {
+
+        map = realloc(map,sizeof(map)+sizeof(char));
+        switch (characterToCheck) {
+            case WALL:
+                map[i] = WALL;
+                break;
+
+            case EMPTY:
+                map[i] = EMPTY;
+                break;
+
+            case MINOTAUR:
+                map[i] = MINOTAUR;
+                break;
+
+            case PLAYER:
+                map[i] = PLAYER;
+                break;
+        }
+        i++;
+        characterToCheck = getc(fpMap);
+    }
+    return map;
+
+
+
+
+
 }
