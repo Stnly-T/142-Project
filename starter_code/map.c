@@ -73,6 +73,10 @@ int locate_character(char character, int* character_y, int* character_x) {
 
 char *load_map(char *filename, int *map_height, int *map_width) {
     FILE *fpMap = fopen(filename, "r");
+    if (fpMap == NULL) {
+        return NULL;
+    }
+
     char characterToCheck = getc(fpMap);
     if (characterToCheck == EOF) {
         return NULL;
@@ -80,11 +84,11 @@ char *load_map(char *filename, int *map_height, int *map_width) {
 
     int widthSetFlag = 1;
     int i = 0;
-    char *mapArray = (char*)malloc(1*sizeof(char));
+    char *mapArray = (char*)malloc(1000*sizeof(char));
 
     while (characterToCheck != EOF) {
 
-        mapArray = realloc(mapArray,sizeof(mapArray)+sizeof(char));
+        // mapArray = realloc(mapArray,sizeof(mapArray)+sizeof(char));
 
         switch (characterToCheck) {
             case WALL:
@@ -120,6 +124,7 @@ char *load_map(char *filename, int *map_height, int *map_width) {
     }
     // printf("%d",i);
     *map_height = i / *map_width;
+    fclose(fpMap);
     return mapArray;
 
 

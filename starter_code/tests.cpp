@@ -28,8 +28,38 @@ int width, height;
 TEST_SUITE_BEGIN("Map tests");
 
 // Tests for load_map
-TEST_CASE("A test for load_map") {
-    CHECK(0 == 0);
+TEST_CASE("handles no/unreachable file") {
+    int w = 0;
+    int h = 0;
+
+    CHECK(load_map("",&h,&w) == NULL);
+}
+TEST_CASE("handles map1") {
+    char testMap1[] = {
+        WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL,
+        WALL, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, WALL,
+        WALL, EMPTY, WALL, WALL, EMPTY, WALL, EMPTY, WALL, WALL, EMPTY, WALL,
+        WALL, EMPTY, WALL, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, WALL, EMPTY, WALL,
+        WALL, EMPTY, WALL, EMPTY, WALL, WALL, WALL, EMPTY, WALL, EMPTY, WALL,
+        WALL, EMPTY, EMPTY, EMPTY, EMPTY, PLAYER, EMPTY, EMPTY, WALL, EMPTY, WALL,
+        WALL, EMPTY, WALL, EMPTY, WALL, WALL, WALL, EMPTY, WALL, EMPTY, WALL,
+        WALL, EMPTY, WALL, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, WALL, EMPTY, WALL,
+        WALL, EMPTY, WALL, WALL, EMPTY, WALL, EMPTY, WALL, WALL, EMPTY, WALL,
+        WALL, EMPTY, EMPTY, EMPTY, EMPTY, WALL, EMPTY, EMPTY, MINOTAUR, EMPTY, WALL,
+        WALL, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, WALL,
+        WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL
+    };
+    int w = 0;
+    int h = 0;
+
+    char *loadedMap = load_map("map.txt",&h,&w);
+
+    for (int i=0; i<132; i++) {
+        CHECK(loadedMap[i] == testMap1[i]);
+    }
+
+    CHECK(w==11);
+    CHECK(h==12);
 }
 
 // Tests for is_wall

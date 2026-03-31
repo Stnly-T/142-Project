@@ -12,6 +12,8 @@
 // defines.h contains useful definitions to keep your code readable
 #include "defines.h"
 // map.h, game.h, and character.h contain prototypes of functions you must implement
+#include <string.h>
+
 #include "map.h"
 #include "game.h"
 #include "character.h"
@@ -88,7 +90,8 @@ int main(void) {
     // height = HARDCODED_HEIGHT;
     // Use the hardcoded map by setting the global map variable equal to it
     // map = hardcoded_map;
-    map = load_map("map2.txt", &height, &width);
+    map = load_map("map.txt", &height, &width);
+    // printf("%d",strlen(map));
 
     // Eventually, the player position should be determined from the map, however, hardcode it for now
     int player_y = 5;
@@ -104,7 +107,7 @@ int main(void) {
     while (input != EOF && input != 4) {
         // Print the map
         print_map();
-        printf("w:%d h:%d", width, height);
+        // printf("w:%d h:%d", width, height);
 
         // Get a character - blocks until one is input
         input = getch();
@@ -117,7 +120,7 @@ int main(void) {
             move_character(&player_y, &player_x, input, PLAYER);
         }
     } // quit if we hit the end of input
-
+    free(map);
     // You must return the correct error code from defines.h from main depending on what happened
     return NO_ERROR;
 }
