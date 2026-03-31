@@ -78,33 +78,49 @@ char *load_map(char *filename, int *map_height, int *map_width) {
         return NULL;
     }
 
+    int widthSetFlag = 1;
     int i = 0;
-    char *map = (char*)malloc(1*sizeof(char));
+    char *mapArray = (char*)malloc(1*sizeof(char));
 
     while (characterToCheck != EOF) {
 
-        map = realloc(map,sizeof(map)+sizeof(char));
+        mapArray = realloc(mapArray,sizeof(mapArray)+sizeof(char));
+
         switch (characterToCheck) {
             case WALL:
-                map[i] = WALL;
+                mapArray[i] = WALL;
                 break;
 
             case EMPTY:
-                map[i] = EMPTY;
+                mapArray[i] = EMPTY;
                 break;
 
             case MINOTAUR:
-                map[i] = MINOTAUR;
+                mapArray[i] = MINOTAUR;
                 break;
 
             case PLAYER:
-                map[i] = PLAYER;
+                mapArray[i] = PLAYER;
                 break;
         }
-        i++;
+
         characterToCheck = getc(fpMap);
+        if (characterToCheck != '\n') {
+            characterToCheck = getc(fpMap);
+            characterToCheck = getc(fpMap);
+        } else {
+            characterToCheck = getc(fpMap);
+            if (widthSetFlag) {
+                *map_width = i+1;
+                widthSetFlag = 0;
+            }
+        }
+
+        i++;
     }
-    return map;
+    // printf("%d",i);
+    *map_height = i / *map_width;
+    return mapArray;
 
 
 

@@ -84,10 +84,11 @@ int main(void) {
     char charge_direction = SEES_NOTHING;
 
     // Set the width and height for the hardcoded map
-    width = HARDCODED_WIDTH;
-    height = HARDCODED_HEIGHT;
+    // width = HARDCODED_WIDTH;
+    // height = HARDCODED_HEIGHT;
     // Use the hardcoded map by setting the global map variable equal to it
-    map = hardcoded_map;
+    // map = hardcoded_map;
+    map = load_map("map2.txt", &height, &width);
 
     // Eventually, the player position should be determined from the map, however, hardcode it for now
     int player_y = 5;
@@ -103,6 +104,7 @@ int main(void) {
     while (input != EOF && input != 4) {
         // Print the map
         print_map();
+        printf("w:%d h:%d", width, height);
 
         // Get a character - blocks until one is input
         input = getch();
