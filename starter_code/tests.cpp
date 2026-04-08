@@ -211,6 +211,33 @@ TEST_CASE("sees right") {
 
     CHECK(sees_player(charY, charX, minoY, minoX) == RIGHT);
 }
+TEST_CASE("sees nothing") {
+    char testMap[] = {
+        EMPTY,PLAYER,EMPTY,
+        MINOTAUR,EMPTY,EMPTY,
+        EMPTY,EMPTY,EMPTY
+    };
+    map = testMap;
+    width=3;
+    height=3;
+    int charY = 0;
+    int charX = 1;
+    int minoY = 1;
+    int minoX = 0;
+
+    CHECK(sees_player(charY, charX, minoY, minoX) == SEES_NOTHING);
+}
+TEST_CASE("checks if caught player") {
+
+    width=3;
+    height=3;
+    int charY = 1;
+    int charX = 1;
+    int minoY = 1;
+    int minoX = 1;
+
+    CHECK(sees_player(charY, charX, minoY, minoX) == CAUGHT_PLAYER);
+}
 TEST_CASE("does not see through walls") {
     char testMap[] = {
         EMPTY,EMPTY,PLAYER,EMPTY,EMPTY,
@@ -222,12 +249,10 @@ TEST_CASE("does not see through walls") {
     map = testMap;
     width=5;
     height=5;
-    int charY = 0;
-    int charX = 2;
     int minoY = 2;
     int minoX = 2;
 
-    CHECK(sees_player(charY, charX, minoY, minoX) == SEES_NOTHING);
+    CHECK(sees_player(0, 2, minoY, minoX) == SEES_NOTHING);
     CHECK(sees_player(2, 0, minoY, minoX) == SEES_NOTHING);
     CHECK(sees_player(2, 4, minoY, minoX) == SEES_NOTHING);
     CHECK(sees_player(4, 2, minoY, minoX) == SEES_NOTHING);
@@ -435,7 +460,7 @@ TEST_CASE("minotaur charges") {
     CHECK(map[0*width+2] == MINOTAUR);
     CHECK(map[0*width+0] == EMPTY);
 }
-TEST_CASE("minotaur catches player") {
+TEST_CASE("minotaur catches player at 2 tiles away") {
     char testMap[] = {
         PLAYER, EMPTY, MINOTAUR
         };
@@ -451,6 +476,24 @@ TEST_CASE("minotaur catches player") {
     CHECK(minoY == 0);
     CHECK(minoX == 0);
     CHECK(map[0*width+0] == MINOTAUR);
+    CHECK(map[0*width+2] == EMPTY);
+}
+TEST_CASE("minotaur catches player at 1 tile away") {
+    char testMap[] = {
+        EMPTY, PLAYER, MINOTAUR
+        };
+    map = testMap;
+    width=3;
+    height=1;
+    int charY = 0;
+    int charX = 1;
+    int minoY = 0;
+    int minoX = 2;
+
+    CHECK(charge_minotaur(&minoY, &minoX, charY, charX, LEFT) == CAUGHT_PLAYER);
+    CHECK(minoY == 0);
+    CHECK(minoX == 1);
+    CHECK(map[0*width+1] == MINOTAUR);
     CHECK(map[0*width+2] == EMPTY);
 }
 TEST_CASE("minotaur breaks walls") {
@@ -483,17 +526,47 @@ TEST_CASE("minotaur wall destroys all directions") {
         };
     map = testMap;
     width=4;
-    height=1;
+    height=4;
     int charY = 4;
     int charX = 4;
     int minoY = 2;
     int minoX = 2;
 
     CHECK(charge_minotaur(&minoY, &minoX, charY, charX, RIGHT) == MOVED_WALL);
-    CHECK(charge_minotaur(&minoY, &minoX, charY, charX, LEFT) == MOVED_WALL);
-    CHECK(charge_minotaur(&minoY, &minoX, charY, charX, UP) == MOVED_WALL);
-    CHECK(charge_minotaur(&minoY, &minoX, charY, charX, DOWN) == MOVED_WALL);
+    CHECK(minoY == 2);
+    CHECK(minoX == 3);
+    CHECK(map[2*width+3] == MINOTAUR);
+    CHECK(map[2*width+2] == EMPTY);
 
+    map = testMap;
+    minoY = 2;
+    minoX = 2;
+
+    CHECK(charge_minotaur(&minoY, &minoX, charY, charX, LEFT) == MOVED_WALL);
+    CHECK(minoY == 2);
+    CHECK(minoX == 1);
+    CHECK(map[2*width+1] == MINOTAUR);
+    CHECK(map[2*width+2] == EMPTY);
+
+    map = testMap;
+    minoY = 2;
+    minoX = 2;
+
+    CHECK(charge_minotaur(&minoY, &minoX, charY, charX, UP) == MOVED_WALL);
+    CHECK(minoY == 1);
+    CHECK(minoX == 2);
+    CHECK(map[1*width+2] == MINOTAUR);
+    CHECK(map[2*width+2] == EMPTY);
+
+    map = testMap;
+    minoY = 2;
+    minoX = 2;
+
+    CHECK(charge_minotaur(&minoY, &minoX, charY, charX, DOWN) == MOVED_WALL);
+    CHECK(minoY == 3);
+    CHECK(minoX == 2);
+    CHECK(map[3*width+2] == MINOTAUR);
+    CHECK(map[2*width+2] == EMPTY);
 }
 
 TEST_SUITE_END();

@@ -36,28 +36,6 @@ char *map = NULL;
 // width and height store the width and height of map
 int width, height;
 
-/**
- * This is the hardcoded map used for labs 1-3.
- * Once you implement load_map in lab 4 you should remove this map, as it cannot be used for the
- * final version of the project.
- * The map's dimensions are 11x12
- */
-#define HARDCODED_WIDTH 11
-#define HARDCODED_HEIGHT 12
-char hardcoded_map[] = {
-    WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL,
-    WALL, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, WALL,
-    WALL, EMPTY, WALL, WALL, EMPTY, WALL, EMPTY, WALL, WALL, EMPTY, WALL,
-    WALL, EMPTY, WALL, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, WALL, EMPTY, WALL,
-    WALL, EMPTY, WALL, EMPTY, WALL, WALL, WALL, EMPTY, WALL, EMPTY, WALL,
-    WALL, EMPTY, EMPTY, EMPTY, EMPTY, PLAYER, EMPTY, EMPTY, WALL, EMPTY, WALL,
-    WALL, EMPTY, WALL, EMPTY, WALL, WALL, WALL, EMPTY, WALL, EMPTY, WALL,
-    WALL, EMPTY, WALL, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, WALL, EMPTY, WALL,
-    WALL, EMPTY, WALL, WALL, EMPTY, WALL, EMPTY, WALL, WALL, EMPTY, WALL,
-    WALL, EMPTY, EMPTY, EMPTY, EMPTY, WALL, EMPTY, EMPTY, MINOTAUR, EMPTY, WALL,
-    WALL, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, WALL,
-    WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL
-};
 // You are NOT allowed to add more global variables!
 // The globals that are included in the starter code provide a convenient way to share information
 // between the many functions that all need access to the same data, but all other data must be
@@ -85,42 +63,80 @@ int main(void) {
     // should randomly move around 1 tile per turn
     char charge_direction = SEES_NOTHING;
 
-    // Set the width and height for the hardcoded map
-    // width = HARDCODED_WIDTH;
-    // height = HARDCODED_HEIGHT;
-    // Use the hardcoded map by setting the global map variable equal to it
-    // map = hardcoded_map;
+    // Load map from map file "map.txt". Throws error if no map can be loaded.
     map = load_map("map.txt", &height, &width);
-    // printf("%d",strlen(map));
+    if (map == NULL) {
+        return ERR_NO_MAP;
+    }
 
-    // Eventually, the player position should be determined from the map, however, hardcode it for now
-    int player_y = 5;
-    int player_x = 5;
+    // Locate player in map file and set position variables accordingly
+    // Throws error if no player is found
+    int player_y;
+    int player_x;
+    if (locate_character(PLAYER, &player_y, &player_x) == CHARACTER_NOT_FOUND) {
+        return ERR_NO_PLAYER;
+    }
 
-    // We also need the Minotaur position. Again, hardcode the starting position for now.
-    int minotaur_y = 9;
-    int minotaur_x = 8;
+    // Locate minotaur in map file and set position variables accordingly
+    // Throws error if no minotaur is found
+    int minotaur_y;
+    int minotaur_x;
+    if (locate_character(MINOTAUR, &minotaur_y, &minotaur_x) == CHARACTER_NOT_FOUND) {
+        return ERR_NO_MINOTAUR;
+    }
+
+    char input = 0;     // input holds the user input
+    int debugFlag = 0;  // debugFlag indicates if debugMode is on (1) or off (0)
 
     // Loop until we hit the end of input
-    // Input holds the user input
-    char input = 0;
     while (input != EOF && input != 4) {
+
         // Print the map
-        print_map();
-        // printf("w:%d h:%d", width, height);
+        if (debugFlag == 1) {
+            // if debug mode is on, print full map
+            print_map();
+        } else {
+            // otherwise, print area around player
+            print_revealed_map(player_y,player_x);
+        }
 
         // Get a character - blocks until one is input
         input = getch();
 
-        // update the minotaur
-        update_minotaur(player_y, player_x, &minotaur_y, &minotaur_x, &charge_direction);
+        // only execute game updates if 'g' is not the input. If 'g' is the input,
+        // turn on debug mode and loop execution
+        if (input != 'g') {
 
-        // move the player only if they haven't been caught
-        if (check_loss(player_y, player_x, minotaur_y, minotaur_x) == KEEP_GOING) {
-            move_character(&player_y, &player_x, input, PLAYER);
+            // update the minotaur
+            update_minotaur(player_y, player_x, &minotaur_y, &minotaur_x, &charge_direction);
+
+            // move the player only if they haven't been caught
+            if (check_loss(player_y, player_x, minotaur_y, minotaur_x) == KEEP_GOING) {
+                move_character(&player_y, &player_x, input, PLAYER);
+            } else {
+                // if check_loss() did not return KEEP_GOING, the player has been
+                // caught and the game is lost
+                printf("Sorry, you lose.");
+                // break out of main execution loop
+                break;
+            }
+
+            // check if the player has won
+            if (check_win(player_y, player_x) == YOU_WIN) {
+                printf("Congratulations! You win!");
+                // break out of main execution loop
+                break;
+            }
+        } else {
+            // change the state of debug mode if 'g' was the input
+            debugFlag = !debugFlag;
         }
+
     } // quit if we hit the end of input
+
+    // free the memory set aside for the map
     free(map);
+
     // You must return the correct error code from defines.h from main depending on what happened
     return NO_ERROR;
 }
